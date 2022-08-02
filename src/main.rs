@@ -170,7 +170,7 @@ impl Model {
         let href = format!("/{}/", constant::SUBPATH.replace("/", ""));
         let logo = format!(
             "/{}/{}",
-            constant::SUBPATH.replace("/", ""),
+            constant::SUBPATH.replace("/", "/"),
             constant::LOGO_PIC
         );
         let avatar = format!(
@@ -185,9 +185,7 @@ impl Model {
                     <h1 class="navbar-item is-size-3">{ constant::SITE_NAME }</h1>
                     </a>
                     <a class="navbar-item" href={href.clone()}>
-                        <figure class="image is-rounded pr-3">
-                            <img src={logo} class="image"/>
-                        </figure>
+            
                     </a>
                 </div>
                 <div class="navbar-end">

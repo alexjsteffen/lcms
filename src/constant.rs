@@ -9,25 +9,22 @@ pub const MODE: Modes = Modes::Development(log::Level::Trace);
 
 // the Default value
 //pub const SUBPATH: &str = "/";
-pub const SUBPATH: &str = "noer/";
+pub const SUBPATH: &str = "/";
 
 // site info
-pub const ADMIN: &str = "Bruce Yuan";
-pub const SITE_NAME: &str = "Homely See Around";
-pub const LOGO_PIC: &str = "/assets/logo.png";
-pub const AVATR_PIC: &str = "/assets/github.png";
-pub const SITE_DESCRIPTION: &str = "<strong>Welcome everybody,</strong> glad to see you here!
-Here are awesome blogs of my <a href=\"https://github.com/homelyguy\">website</a>. 
-enjoy yourself here.
+pub const ADMIN: &str = "Hardy Steffen";
+pub const SITE_NAME: &str = "Terms";
+pub const LOGO_PIC: &str = "dr.ajhs.io/media/custom/mylogo.png";
+pub const AVATR_PIC: &str = "hardy-steffen.b-cdn.net/li.png";
+pub const SITE_DESCRIPTION: &str = "2022 Hardy Steffen
   ";
 
 // Note That
 // the string is line-separated
 // each line is a key-value pair
 pub const USER_INFO: &str = "
-github: https://github.com/homelyguy/,
-email: bruceyuan0@protonmail.com,
-social_platform: https://yourlink.here/
+ajhs.li: https://ajhs.li
+email: alex@ajhs.io,
 ";
 // or the alternative
-pub const OTHER_USER_INFO: &str = "github: https://github.com/homelyguy/,\nemail: bruceyuan0@protonmail.com,\nsocial_platform: https://yourlink.here/,";
+pub const OTHER_USER_INFO: &str = "ajhs.li: https://ajhs.li//,\nemail: alex@ajhs.io";
