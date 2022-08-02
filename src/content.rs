@@ -190,7 +190,7 @@ impl Blog {
                 }
                 // not know
                 None => {
-                    log::error!("Time Stampe is not found in file name nor defined in file");
+                    log::error!("Time Stamp is not found in file name nor defined in file");
                     log::error!("file is ignored to proceed: {:?}", self.meta.path);
                     self.ignored = true;
                 }
