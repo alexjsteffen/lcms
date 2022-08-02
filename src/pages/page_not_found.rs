@@ -19,7 +19,7 @@ impl Component for PageNotFound {
                             { "Page not found" }
                         </h1>
                         <h2 class="subtitle">
-                            { "Page page does not seem to exist" }
+                            { "This page does not exist. Sorry." }
                         </h2>
                     </div>
                 </div>

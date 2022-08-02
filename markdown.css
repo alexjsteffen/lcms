@@ -2,6 +2,7 @@
  * github like style
  * https://github.com/iamcco/markdown.css/blob/master/dest/github/markdown.css
  */
+ @import url('https://hardy-steffen.b-cdn.net/fonts/stylesheet.css');
 
 :root {
     --color-text-primary: #333;
@@ -48,12 +49,12 @@
   margin-bottom: 0;
 }
 .markdown-body {
-  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Fivo Sans", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
   color: var(--color-text-primary);
   line-height: 1.6;
   word-wrap: break-word;
-  padding: 45px;
+  padding: 38px;
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border-primary);
   -webkit-border-radius: 0 0 3px 3px;
@@ -289,7 +290,7 @@
   list-style-type: none;
 }
 .task-list-item input {
-  font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font: 13px/1.4 "Fivo Sans", Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   margin: 0 0.35em 0.25em -1.6em;
   vertical-align: middle;
 }
