@@ -13,7 +13,7 @@ pub const SUBPATH: &str = "/";
 
 // site info
 pub const ADMIN: &str = "Hardy Steffen";
-pub const SITE_NAME: &str = "Terms";
+pub const SITE_NAME: &str = "Legal Documents";
 pub const LOGO_PIC: &str = "dr.ajhs.io/media/custom/mylogo.png";
 pub const AVATR_PIC: &str = "hardy-steffen.b-cdn.net/li.png";
 pub const SITE_DESCRIPTION: &str = "2022 Hardy Steffen
@@ -23,8 +23,8 @@ pub const SITE_DESCRIPTION: &str = "2022 Hardy Steffen
 // the string is line-separated
 // each line is a key-value pair
 pub const USER_INFO: &str = "
-ajhs.li: https://ajhs.li
-email: alex@ajhs.io,
+Legal Innovation: https://ajhs.li,
+Hardy Steffen: https://hardysteffen.com,
 ";
 // or the alternative
-pub const OTHER_USER_INFO: &str = "ajhs.li: https://ajhs.li//,\nemail: alex@ajhs.io";
+pub const OTHER_USER_INFO: &str = "Legal Innovation: https://ajhs.li//,\nHardy Steffen: https://hardysteffen.com//";

@@ -181,17 +181,17 @@ impl Model {
         html! {
             <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
-                    <a class="navbar-item" href={href.clone()}>
+                    <a class="navbar-item" href="https://tp.ajhs.li">
                     <h1 class="navbar-item is-size-3">{ constant::SITE_NAME }</h1>
                     </a>
-                    <a class="navbar-item" href={href.clone()}>
+                    <a class="navbar-item" href="https://tp.ajhs.li">
             
                     </a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item" >
                     <div class="field is-grouped">
-                        <a  href={href.clone()}>
+                        <a  href="https://tp.ajhs.li">
                             <figure class="image is-rounded pr-3">
                                 <img style="width:auto;" src={avatar} />
                             </figure>

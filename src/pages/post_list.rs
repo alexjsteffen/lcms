@@ -67,7 +67,7 @@ impl Component for PostList {
         let view = if &parse.display == "gridCard" {
             "List View"
         } else {
-            "Grid View"
+            ""
         };
         let link = ctx.link().clone();
         let changemode = Callback::from(move |_| {

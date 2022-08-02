@@ -59,7 +59,6 @@ impl Component for BlogCard {
                             { &meta.title.replace("-", " ") }
                         </Link<Route>>
                         <br />
-                        <time datetime={ meta.date.clone() } >{ &meta.date }</time>
                     </div>
                 </div>
             }
@@ -80,7 +79,6 @@ impl Component for BlogCard {
                                         </Link<Route>>
                                     </div>
                                     <div class="level-item mt-2" style="display: block">
-                                        <time datetime={ meta.date.clone() } >{ &meta.date }</time>
                                     </div>
                                 </div>
                         </div>
