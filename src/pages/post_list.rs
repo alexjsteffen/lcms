@@ -69,17 +69,9 @@ impl Component for PostList {
         } else {
             ""
         };
-        let link = ctx.link().clone();
-        let changemode = Callback::from(move |_| {
-            parse.dispatch(ParseAct::ChangeDisplayMode);
-            link.send_message(Msg::PageUpdated);
-        });
 
         html! {
             <>
-            <button onclick={changemode} class="button is-white right" >
-                { view }
-            </button>
             <div class="section container">
                 { self.view_posts(ctx) }
                 <Pagination
