@@ -182,7 +182,7 @@ impl Model {
             <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="https://tp.ajhs.li">
-                    <h1 class="navbar-item is-size-3">{ constant::SITE_NAME }</h1>
+                    <img alt="Logo" src="https://cdn.j2.lv/hslogo.png"/>
                     </a>
                     <a class="navbar-item" href="https://tp.ajhs.li">
             
