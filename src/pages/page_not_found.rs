@@ -2,9 +2,47 @@ use yew::prelude::*;
 
 pub struct PageNotFound;
 
+/// Implements the `Component` trait for the `PageNotFound` struct.
+///
+/// The `PageNotFound` struct represents a component for rendering a "Page not found" message.
+/// It displays a hero section with a title and subtitle indicating that the page does not exist.
+///
+/// # Example
+///
+/// ```rust
+/// // Create a new instance of `PageNotFound`
+/// let page_not_found = PageNotFound::create(&ctx);
+///
+/// // Render the component
+/// let html = page_not_found.view(&ctx);
+/// ```
+///
+/// # Filepath
+///
+/// The code for this component is located at `/Users/ajhs/Repositories/tp.ajhs.li/src/pages/page_not_found.rs`.
+///
+/// # Generic Parameters
+///
+/// - `Message`: This component does not emit any messages.
+/// - `Properties`: This component does not have any properties.
+///
+/// # Methods
+///
+/// - `create`: Creates a new instance of `PageNotFound`.
+/// - `view`: Renders the component and returns the corresponding HTML.
+///
+/// # Example Usage
+///
+/// ```rust
+/// // Create a new instance of `PageNotFound`
+/// let page_not_found = PageNotFound::create(&ctx);
+///
+/// // Render the component
+/// let html = page_not_found.view(&ctx);
+/// ```
 impl Component for PageNotFound {
-    type Message = ();
-    type Properties = ();
+    type Message = (); // Add the missing `type Message` item
+    type Properties = (); // Add the missing `type Properties` item
 
     fn create(_ctx: &Context<Self>) -> Self {
         Self

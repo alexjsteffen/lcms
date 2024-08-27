@@ -82,6 +82,31 @@ pub struct Post {
     post: FetchState<Blog>,
     notified: bool,
 }
+/// Implements the `Component` trait for the `Post` struct.
+///
+/// This component represents a blog post and handles its creation, update, and view.
+/// It provides methods for fetching and displaying the blog post content.
+///
+/// # Example
+///
+/// ```rust
+/// impl Component for Post {
+///     type Message = Msg;
+///     type Properties = Props;
+///
+///     fn create(ctx: &Context<Self>) -> Self {
+///         // implementation details...
+///     }
+///
+///     fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
+///         // implementation details...
+///     }
+///
+///     fn view(&self, ctx: &Context<Self>) -> Html {
+///         // implementation details...
+///     }
+/// }
+/// ```
 impl Component for Post {
     type Message = Msg;
     type Properties = Props;

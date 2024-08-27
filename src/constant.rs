@@ -16,7 +16,7 @@ pub const ADMIN: &str = "Hardy Steffen";
 pub const SITE_NAME: &str = "Legal Documents";
 pub const LOGO_PIC: &str = "dr.ajhs.io/media/custom/mylogo.png";
 pub const AVATR_PIC: &str = "hardy-steffen.b-cdn.net/li.png";
-pub const SITE_DESCRIPTION: &str = "2022 Hardy Steffen
+pub const SITE_DESCRIPTION: &str = "2024 - ajhs Legal Innovation
   ";
 
 // Note That

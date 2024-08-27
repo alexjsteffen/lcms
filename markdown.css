@@ -2,7 +2,7 @@
  * github like style
  * https://github.com/iamcco/markdown.css/blob/master/dest/github/markdown.css
  */
- @import url('https://hardy-steffen.b-cdn.net/fonts/stylesheet.css');
+ @import url('https://cdn.j2.lv/fonts/rc/stylesheet.css');
 
 
 :root {
@@ -68,12 +68,12 @@
   margin-bottom: 0;
 }
 .markdown-body {
-  font-family: "Fivo Sans", "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 16px;
+  font-family: "Radio Canada", --apple-system, system-ui, "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 15px;
   color: var(--color-text-primary);
   line-height: 1.6;
   word-wrap: break-word;
-  padding: 38px;
+  padding: 36px;
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border-primary);
   -webkit-border-radius: 0 0 3px 3px;
@@ -405,7 +405,7 @@ main {
   margin-top: 0;
   margin-bottom: 0;
   padding-right: 16px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
 }
 

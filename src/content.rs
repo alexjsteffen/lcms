@@ -1,4 +1,8 @@
 use std::path::PathBuf;
+use std::hash::{Hash, Hasher};
+use std::collections::hash_map::DefaultHasher;
+
+use rand::Rng;
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct BlogMeta {
@@ -10,12 +14,8 @@ pub struct BlogMeta {
     pub hero: String,
 }
 
-use std::hash::{Hash, Hasher};
 impl Hash for BlogMeta {
-    fn hash<H>(&self, state: &mut H)
-    where
-        H: std::hash::Hasher,
-    {
+    fn hash<H: Hasher>(&self, state: &mut H) {
         self.title.hash(state);
         self.timestamp.hash(state);
         self.path.hash(state);
@@ -26,16 +26,15 @@ impl BlogMeta {
     pub fn new() -> Self {
         Self {
             id: 0,
-            path: PathBuf::new(),
+            title: String::new(),
             timestamp: 0,
-            date: "".into(),
-            title: "".into(),
-            hero: "".into(),
+            date: String::new(),
+            path: PathBuf::new(),
+            hero: String::new(),
         }
     }
 
     pub fn get_hash(&mut self) {
-        use std::collections::hash_map::DefaultHasher;
         let mut hasher = DefaultHasher::new();
         self.hash(&mut hasher);
         self.id = hasher.finish();
@@ -44,84 +43,60 @@ impl BlogMeta {
     pub fn with_path(path: &str) -> Option<Self> {
         let path = PathBuf::from(path);
         if let Some(file_name) = path.file_name() {
-            if file_name.to_str().is_none() {
-                log::error!("file name is not valid: {:?}", path);
-                return None;
-            }
-            let file_name_str = file_name.to_str().unwrap();
-            let pat = regex::Regex::new(
-                r"(\d{2,4}\D\d{1,2}\D\d{1,2}(\D\d{1,2}){0,3})\D(?P<title>.*?)\.rmd$",
-            )
-            .unwrap();
-            //let path1 = "19-10-07-13-32-bolg-title-here";
-            //let path1 = "data/19-10-07-13-bolg-title-here.md";
-            //let path1 = "";
-            //self.path = path1.into();
-            let mut time_items = [0u64; 6];
-            const UNITS: [u64; 6] = [365 * 24 * 3600, 30 * 24 * 3600, 24 * 3600, 60 * 60, 60, 1];
-            // if path is matched
-            if let Some(cap) = pat.captures(file_name_str) {
-                let date = cap[1].into();
-                cap[1]
-                    .split(|c: char| !c.is_ascii_digit())
-                    .enumerate()
-                    .for_each(|(ind, e)| {
-                        let num = e.parse::<u64>().unwrap_or(0);
-                        time_items[ind] = num;
-                    });
-                if time_items[0] < 100 {
-                    time_items[0] += 32;
-                }
-                let sum = UNITS
-                    .iter()
-                    .zip(time_items.iter())
-                    .fold(0, |acc, (e1, e2)| acc + e1 * e2);
-                if cap.name("title").is_none() {
-                    log::error!(
-                        "title that consist of the file name is not valid: {:?}",
-                        path
-                    );
-                    return None;
-                }
-                let mut meta = Self {
-                    id: 0,
-                    title: cap.name("title").unwrap().as_str().into(),
-                    path,
-                    timestamp: sum,
-                    date,
-                    hero: "".into(),
-                };
-                meta.get_hash();
-                meta.image_url();
+            if let Some(file_name_str) = file_name.to_str() {
+                let pat = regex::Regex::new(
+                    r"(\d{2,4}\D\d{1,2}\D\d{1,2}(\D\d{1,2}){0,3})\D(?P<title>.*?)\.rmd$",
+                )
+                .unwrap();
 
-                return Some(meta);
-            } else {
-                log::error!("file name is not valid: {:?}", path);
-                return None;
+                if let Some(cap) = pat.captures(file_name_str) {
+                    let date = cap[1].to_string();
+                    let mut time_items = [0u64; 6];
+                    const UNITS: [u64; 6] = [365 * 24 * 3600, 30 * 24 * 3600, 24 * 3600, 60 * 60, 60, 1];
+
+                    cap[1]
+                        .split(|c: char| !c.is_ascii_digit())
+                        .enumerate()
+                        .for_each(|(ind, e)| {
+                            time_items[ind] = e.parse().unwrap_or(0);
+                        });
+
+                    if time_items[0] < 100 {
+                        time_items[0] += 2000;
+                    }
+
+                    let sum: u64 = UNITS.iter().zip(time_items.iter()).map(|(u, t)| u * t).sum();
+
+                    if let Some(title_match) = cap.name("title") {
+                        let mut meta = Self {
+                            id: 0,
+                            title: title_match.as_str().to_string(),
+                            path,
+                            timestamp: sum,
+                            date,
+                            hero: String::new(),
+                        };
+                        meta.get_hash();
+                        meta.image_url();
+
+                        return Some(meta);
+                    }
+                }
             }
+            log::error!("file name is not valid: {:?}", path);
         } else {
             log::error!("file name is not valid: {:?}", path);
-            return None;
         }
+        None
     }
 
     pub fn image_url(&mut self) {
-        static mut DELTA: u16 = 0;
-        let mut now = js_sys::Date::now() * 1000.0;
-        unsafe { now += DELTA as f64 };
-        let cache_buster = (now as u64 % u16::MAX as u64) as u16;
-        log::trace!("cache_buster is: {}", cache_buster);
-        self.hero = format!(
-            "https://source.unsplash.com/random/600x300&sig={}",
-            cache_buster
-        );
-        unsafe {
-            DELTA += 1;
-        }
+        let mut rng = rand::thread_rng();
+        let random_number: u8 = rng.gen_range(1..=8);
+        self.hero = format!("https://cdn.hardysteffen.com/tpbg/BG-{}.png", random_number);
     }
 }
 
-/// it represents a `Blog`
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Blog {
     pub meta: BlogMeta,
@@ -132,68 +107,48 @@ pub struct Blog {
 }
 
 impl Blog {
-    /// extract date infomation from blog
     pub fn date_info(&mut self, date: Option<&str>) {
-        // try get it from path
-        // eg: 2019-10-07-bolg-title-here;  19-3-7-bolg-title-here
-        // eg: 2019-10-07-13-32-bolg-title-here;  19-3-7-01-59-bolg-title-here
-        // note that the format is descending: yyyy-mm-dd-hh-MM-ss
-        // and the accuracy is second and
-        // year,month,day are required
         let pat = regex::Regex::new(r"(\d{2,4}\D\d{1,2}\D\d{1,2}(\D\d{1,2}){0,3})").unwrap();
-        //let path1 = "19-10-07-13-32-bolg-title-here";
-        //let path1 = "data/19-10-07-13-bolg-title-here.md";
-        //let path1 = "";
-        //self.path = path1.into();
         let mut time_items = [0u64; 6];
         const UNITS: [u64; 6] = [365 * 24 * 3600, 30 * 24 * 3600, 24 * 3600, 60 * 60, 60, 1];
-        // if path is matched
-        if let Some(cap) = pat.captures(self.meta.path.to_str().unwrap()) {
-            cap[1]
-                .split(|c: char| !c.is_ascii_digit())
-                .enumerate()
-                .for_each(|(ind, e)| {
-                    let num = e.parse::<u64>().unwrap_or(0);
-                    time_items[ind] = num;
-                });
-            if time_items[0] < 100 {
-                time_items[0] += 32;
-            }
-            let sum = UNITS
-                .iter()
-                .zip(time_items.iter())
-                .fold(0, |acc, (e1, e2)| acc + e1 * e2);
-            self.meta.timestamp = sum;
-        } else {
-            // path is not matched but pre-defined
-            // try get it from meta data in pre-defined info
-            // eg: date: 2019-10-07
-            match date {
-                Some(s) => {
-                    if let Some(cap) = pat.captures(s) {
-                        cap[1]
-                            .split(|c: char| !c.is_ascii_digit())
-                            .enumerate()
-                            .for_each(|(ind, e)| {
-                                let num = e.parse::<u64>().unwrap_or(0);
-                                time_items[ind] = num;
-                            });
-                        if time_items[0] < 100 {
-                            time_items[0] += 2000;
-                        }
-                        let sum = UNITS
-                            .iter()
-                            .zip(time_items.iter())
-                            .fold(0, |acc, (e1, e2)| acc + e1 * e2);
-                        self.meta.timestamp = sum;
-                    }
+
+        if let Some(path_str) = self.meta.path.to_str() {
+            if let Some(cap) = pat.captures(path_str) {
+                cap[1]
+                    .split(|c: char| !c.is_ascii_digit())
+                    .enumerate()
+                    .for_each(|(ind, e)| {
+                        time_items[ind] = e.parse().unwrap_or(0);
+                    });
+
+                if time_items[0] < 100 {
+                    time_items[0] += 2000;
                 }
-                // not know
-                None => {
+
+                self.meta.timestamp = UNITS.iter().zip(time_items.iter()).map(|(u, t)| u * t).sum();
+            } else if let Some(s) = date {
+                if let Some(cap) = pat.captures(s) {
+                    cap[1]
+                        .split(|c: char| !c.is_ascii_digit())
+                        .enumerate()
+                        .for_each(|(ind, e)| {
+                            time_items[ind] = e.parse().unwrap_or(0);
+                        });
+
+                    if time_items[0] < 100 {
+                        time_items[0] += 2000;
+                    }
+
+                    self.meta.timestamp = UNITS.iter().zip(time_items.iter()).map(|(u, t)| u * t).sum();
+                } else {
                     log::error!("Time Stamp is not found in file name nor defined in file");
                     log::error!("file is ignored to proceed: {:?}", self.meta.path);
                     self.ignored = true;
                 }
+            } else {
+                log::error!("Time Stamp is not found in file name nor defined in file");
+                log::error!("file is ignored to proceed: {:?}", self.meta.path);
+                self.ignored = true;
             }
         }
     }

@@ -1,3 +1,11 @@
+//! This module provides a pagination component for a web application using the Yew framework.
+//! The component allows for navigation between multiple pages of content, displaying a series of
+//! links to different pages and providing navigation buttons for moving forward and backward through
+//! the pages.
+//!
+//! The component uses the `serde` crate for serialization and deserialization of query parameters,
+//! and the `yew` and `yew_router` crates for building the web interface and handling routing.
+
 use serde::Deserialize;
 use serde::Serialize;
 use yew::prelude::*;

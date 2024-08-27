@@ -15,6 +15,37 @@ pub struct BlogCard {
     meta: BlogMeta,
 }
 
+/// Implements the `Component` trait for the `BlogCard` struct.
+///
+/// This component is responsible for rendering a blog card based on the provided properties.
+/// It supports two display modes: `gridCard` and `listTile`.
+///
+/// # Examples
+///
+/// ```
+/// use yew::prelude::*;
+///
+/// struct BlogCard {
+///     meta: Meta,
+/// }
+///
+/// impl Component for BlogCard {
+///     type Message = ();
+///     type Properties = Props;
+///
+///     fn create(ctx: &Context<Self>) -> Self {
+///         // Implementation details omitted
+///     }
+///
+///     fn changed(&mut self, ctx: &Context<Self>) -> bool {
+///         // Implementation details omitted
+///     }
+///
+///     fn view(&self, ctx: &Context<Self>) -> Html {
+///         // Implementation details omitted
+///     }
+/// }
+/// ```
 impl Component for BlogCard {
     type Message = ();
     type Properties = Props;
@@ -24,11 +55,7 @@ impl Component for BlogCard {
             .link()
             .context::<ParseActContext>(Callback::noop())
             .expect("Parser Context not found");
-        log::debug!(
-            "posts len: {}, indexs: {:?}",
-            parser.len(),
-            parser.inner().indexs
-        );
+        log::debug!("posts len: {}, indexs: {:?}", parser.len(), parser.inner().indexs);
         let meta = parser.get_meta(&ctx.props().id).unwrap().clone();
         Self { meta }
     }

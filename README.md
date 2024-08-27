@@ -1,13 +1,17 @@
 # What's Noer
 
-[noer](https://github.com/homelyguy/noer) is a minimal, elegant and content-orientated static style blog CMS for those who prefer **Markdown**, **static site**, **Web-Assembly**. Markdown-based, simple to use; Static Style, github-pages supported, easy to deploy, serve and maintain; No JS/CSS/HTML touched; It makes content management Simple and Efficint.
+The website for the terms of service and privacy policy for ajhs.li has been updated to provide clear and accessible information for users.
 
-See [demo site](https://homelyguy.github.io/noer/)
+For those interested in creating a minimal, elegant, and content-oriented static blog CMS, consider [Noer](https://github.com/homelyguy/noer). It is designed for users who prefer **Markdown**, **static sites**, and **WebAssembly**. Noer features a Markdown-based interface that is easy to use, supports static style, and is compatible with GitHub Pages for effortless deployment, serving, and maintenance. No JavaScript, CSS, or HTML is modified, ensuring straightforward and efficient content management.
 
-# How To Use
+See the [completed website for ajhs.li](https://tp.ajhs.li/).
+
+# Development Notes
+
+## How To Use
 there are some requirements to be satisfied before we use it.
 
-## Pre-requisite
+### Pre-requisite
 - First of all, [rust](https://rust-lang.org) language and its building tool are necessary. you can install them following the description [here](https://www.rust-lang.org/tools/install);
 -	Noer is built upon Web-Assembly and [yew](https://yew.rs), the [tutorial](https://yew.rs/docs/tutorial) is recommanded before getting started;
 - build tools are needed
@@ -15,7 +19,7 @@ there are some requirements to be satisfied before we use it.
  -- wasm32-unknown-unknown ( `rustup target add wasm32-unknown-unknown ` )
 
 
-## Github Page(Optional)
+### Github Page(Optional)
 By default, the compiled output is not suitable for github pages, you got to enable it in the configuration file `src/constant.rs` 
 ```
 // if using github pages, it is required to deploy it to subpath
@@ -24,7 +28,7 @@ By default, the compiled output is not suitable for github pages, you got to ena
 pub const SUBPATH: &str = "demo/";
 ```
 
-## Site Infomation
+### Site Infomation
 There are some basic info about the site in `stc/constant.rs`, including
 - `MODE` the current mode of the project, noer will set logger if in development mode and disable it is release mode.  
 - `ITEMS_PER_PAGE` number of posts card that a page to display, note that it shall be multiple of 3.
@@ -35,7 +39,7 @@ There are some basic info about the site in `stc/constant.rs`, including
 - `SITE_DESCRIPTION` just site Description.
 - `USER_INFO` some extra infomation of the user present to viewers, such as social network, email, etc. Note that it is line-separated, each line is a key-value pair.
 
-## Compile
+### Compile
 ```
 //normal 
 sh ./build.sh
@@ -47,7 +51,7 @@ sh ./build.sh
 		trunk serve --public-url /demo
 ```
 
-## Deployment
+### Deployment
 `noer` is static style site, Deploying noer as web application is just as simple as exposing the compiled `index.html`. here representing an example for nginx user
 ```
 // /etc/nginx/sites-enabled/noer.conf
@@ -80,6 +84,6 @@ server {
 }
 ```
 
-# Known Issues
+### Known Issues
 - due to the limit of yew, `late` or `katex` is not supported, see [issue](https://github.com/yewstack/yew/discussions/2446)
 - some uncommon features of markdown are not supported so far (subscript/supscript, some Markup, Definition, Abbreviations)

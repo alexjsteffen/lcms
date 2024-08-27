@@ -53,7 +53,7 @@ pub async fn read_dir() -> Vec<String> {
 }
 
 pub fn str2blog(s: &str, meta: &BlogMeta) -> Option<Blog> {
-    log::trace!("parsing a string into a blog");
+    log::trace!("parsing a string into a page");
     let sp = s.splitn(3, "---").collect::<Vec<_>>();
     let metadata = sp[1].trim();
     let cont = sp[2]
