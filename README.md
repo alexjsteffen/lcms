@@ -1,4 +1,4 @@
-# What's Noer
+# tp.ajhs.li
 
 The website for the terms of service and privacy policy for ajhs.li has been updated to provide clear and accessible information for users.
 
